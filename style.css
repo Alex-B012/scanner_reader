@@ -4,11 +4,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: red;
+  background-color: lightgray;
+  background-image: linear-gradient(
+    40deg,
+    rgb(110, 205, 243),
+    rgb(170, 231, 255)
+  );
 }
 
 #reader {
-  width: 500px;
-  height: 500px;
-  border: 5px solid green;
+  width: 100%;
+  height: 100%;
+  border: 1px solid darkgray;
 }

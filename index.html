@@ -5,25 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
     <title>Scanner reader</title>
-    <!-- Add HTML5 QR code library -->
-    <script src="html5-qrcode.min.js"></script>
+    <script src="https://unpkg.com/html5-qrcode@2.0.9/dist/html5-qrcode.min.js"></script>
   </head>
 
   <body>
     <div class="app">
-      <div style="width: 500px" id="reader"></div>
+      <div id="reader"></div>
     </div>
   </body>
 
   <script>
     function onScanSuccess(decodedText, decodedResult) {
-      // Handle on success condition with the decoded text or result.
       console.log(`Scan result: ${decodedText}`, decodedResult);
-      html5QrcodeScanner.stop(); // Stop the scanner after a successful scan
+      html5QrcodeScanner.stop();
     }
 
     function onScanError(errorMessage) {
-      // handle on error condition, with error message
       console.error("Scan error: ", errorMessage);
     }
 
