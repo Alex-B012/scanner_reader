@@ -6,7 +6,11 @@
     <link rel="stylesheet" href="reset.css" />
     <link rel="stylesheet" href="style.css" />
     <title>Scanner reader</title>
-    <script src="https://unpkg.com/html5-qrcode@2.0.9/dist/html5-qrcode.min.js"></script>
+    <!-- <script src="https://unpkg.com/html5-qrcode@2.0.9/dist/html5-qrcode.min.js"></script> -->
+    <script
+      src="https://unpkg.com/html5-qrcode"
+      type="text/javascript"
+    ></script>
   </head>
 
   <body>
@@ -25,10 +29,27 @@
       console.error("Scan error: ", errorMessage);
     }
 
-    var html5QrcodeScanner = new Html5QrcodeScanner("reader", {
+    let qrboxFunction = function (viewfinderWidth, viewfinderHeight) {
+      let minEdgePercentage = 0.7; // 70%
+      let minEdgeSize = Math.min(viewfinderWidth, viewfinderHeight);
+      let qrboxSize = Math.floor(minEdgeSize * minEdgePercentage);
+      return {
+        width: qrboxSize,
+        height: qrboxSize,
+      };
+    };
+
+    const formatsToSupport = [Html5QrcodeSupportedFormats.DATA_MATRIX];
+
+    let config = {
       fps: 10,
-      qrbox: 250,
-    });
+      qrbox: qrboxFunction,
+      aspectRatio: window.innerWidth / window.innerHeight,
+      rememberLastUsedCamera: true,
+      formatsToSupport: formatsToSupport,
+    };
+
+    var html5QrcodeScanner = new Html5QrcodeScanner("reader", config, false);
     html5QrcodeScanner.render(onScanSuccess, onScanError);
   </script>
 </html>
