@@ -4,7 +4,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: lightgray;
   background-image: linear-gradient(
     40deg,
     rgb(110, 205, 243),
