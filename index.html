@@ -38,7 +38,7 @@
       formatsToSupport: [Html5QrcodeSupportedFormats.DATA_MATRIX],
     };
 
-    const html5Qrcode = new Html5Qrcode("reader");
+    const html5Qrcode = new Html5Qrcode("reader", config);
 
     function onScanSuccess(text, result) {
       count++;
@@ -85,7 +85,7 @@
 
       html5Qrcode.start(
         { deviceId: cameraId },
-        config,
+        // config,
         onScanSuccess,
         onScanError,
       );
