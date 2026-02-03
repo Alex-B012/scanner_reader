@@ -16,7 +16,10 @@
   <body>
     <div class="app">
       <div id="reader"></div>
-      <div id="ratio"></div>
+      <div id="ratio">
+        <div id="camera-in-use"></div>
+        <div id="count_id">Count:</div>
+      </div>
     </div>
   </body>
 
@@ -43,6 +46,7 @@
       ) {
         scannedProducts.add(result);
         console.log("Добавлен:", result);
+        document.getElementById("count_id").textContent = `Count: ${count}`;
       } else {
         console.log("Дубликат, не добавляем:", result);
       }
@@ -58,13 +62,21 @@
     }
 
     Html5Qrcode.getCameras().then((cameras) => {
-      if (!cameras || cameras.length === 0) {
+      if (!cameras.length) {
         console.error("No cameras found");
         return;
       }
-      if (!cameras.length) return;
 
-      const cameraId = cameras[0].id;
+      let backCamera =
+        cameras.find((camera) => /back|rear|environment/i.test(camera.label)) ||
+        cameras.find((camera) => /wide|ultra|tele/i.test(camera.label));
+
+      const cameraId = backCamera ? backCamera.id : cameras[0].id;
+
+      console.log("Using camera:", backCamera?.label || "default");
+
+      document.getElementById("camera-in-use").textContent =
+        `Camera: ${backCamera?.label || "default"}`;
 
       html5Qrcode.start(
         { deviceId: cameraId },

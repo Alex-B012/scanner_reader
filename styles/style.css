@@ -12,10 +12,16 @@
   height: 100vh;
 }
 
-#reader__scan_region {
+#ratio {
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  color: red;
+}
+/* #reader__scan_region {
   min-height: 50vh;
-}
+} */
 
-#reader__dashboard {
+/* #reader__dashboard {
   max-height: 20vh;
-}
+} */
