@@ -13,9 +13,10 @@
     <div class="app">
       <div id="reader"></div>
       <div id="ratio">
-        <div id="camera-in-use"></div>
         <div id="count_id">Count:</div>
         <div id="set-size">Set size:</div>
+        <div id="ratio-size">Ratio:</div>
+        <div id="camera-in-use"></div>
       </div>
     </div>
   </body>
@@ -29,8 +30,8 @@
       // qrbox: { width: 320, height: 240 },
       qrbox: { width: 315, height: 240 },
       // qrbox: { width: 425, height: 340 },
-      aspectRatio: window.innerWidth / window.innerHeight,
-      // aspectRatio: window.innerHeight / window.innerWidth,
+      // aspectRatio: window.innerWidth / window.innerHeight,
+      aspectRatio: window.innerHeight / window.innerWidth,
       rememberLastUsedCamera: true,
       formatsToSupport: [Html5QrcodeSupportedFormats.DATA_MATRIX],
     };
@@ -87,5 +88,8 @@
         onScanError,
       );
     });
+
+    document.getElementById("ratio-size").textContent =
+      `Ratio: ${config.aspectRatio}`;
   </script>
 </html>
