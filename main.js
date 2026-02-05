@@ -66,5 +66,7 @@ Html5Qrcode.getCameras().then((cameras) => {
   html5Qrcode.start({ deviceId: cameraId }, config, onScanSuccess, onScanError);
 });
 
-document.getElementById("ratio-size").textContent =
-  `Ratio: ${config.aspectRatio}`;
+window.onload = () => {
+  document.getElementById("ratio-size").textContent =
+    `Ratio: ${config.aspectRatio}`;
+};
