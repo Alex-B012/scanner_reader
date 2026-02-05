@@ -15,81 +15,12 @@
       <div id="ratio">
         <div id="count_id">Count:</div>
         <div id="set-size">Set size:</div>
+        <div id="set-info">Set info:</div>
         <div id="ratio-size">Ratio:</div>
         <div id="camera-in-use"></div>
       </div>
     </div>
   </body>
 
-  <script>
-    let scannedProducts = new Set();
-    let count = 0;
-
-    const config = {
-      fps: 30,
-      // qrbox: { width: 320, height: 240 },
-      qrbox: { width: 315, height: 240 },
-      // qrbox: { width: 425, height: 340 },
-      // aspectRatio: window.innerWidth / window.innerHeight,
-      aspectRatio: window.innerHeight / window.innerWidth,
-      rememberLastUsedCamera: true,
-      formatsToSupport: [Html5QrcodeSupportedFormats.DATA_MATRIX],
-    };
-
-    const html5Qrcode = new Html5Qrcode("reader", config);
-
-    function onScanSuccess(text, result) {
-      count++;
-
-      if (
-        !scannedProducts.has(result) &&
-        result.format.formatName === "DATA_MATRIX"
-      ) {
-        scannedProducts.add(result);
-        console.log("Добавлен:", result);
-        document.getElementById("count_id").textContent = `Count: ${count}`;
-        document.getElementById("set-size").textContent =
-          `Set size: ${scannedProducts.size}`;
-      } else {
-        console.log("Дубликат, не добавляем:", result);
-      }
-
-      console.log("Count:", count);
-      console.log("Scanned:", text);
-      console.log("Всего уникальных:", scannedProducts.size);
-      console.log("Set:", scannedProducts);
-    }
-
-    function onScanError(err) {
-      console.warn("ERROR:", err);
-    }
-
-    Html5Qrcode.getCameras().then((cameras) => {
-      if (!cameras.length) {
-        console.error("No cameras found");
-        return;
-      }
-
-      let backCamera =
-        cameras.find((camera) => /back|rear|environment/i.test(camera.label)) ||
-        cameras.find((camera) => /wide|ultra|tele/i.test(camera.label));
-
-      const cameraId = backCamera ? backCamera.id : cameras[0].id;
-
-      console.log("Using camera:", backCamera?.label || "default");
-
-      document.getElementById("camera-in-use").textContent =
-        `Camera: ${backCamera?.label || "default"}`;
-
-      html5Qrcode.start(
-        { deviceId: cameraId },
-        config,
-        onScanSuccess,
-        onScanError,
-      );
-    });
-
-    document.getElementById("ratio-size").textContent =
-      `Ratio: ${config.aspectRatio}`;
-  </script>
+  <script src="./main.js"></script>
 </html>
