@@ -1,6 +1,8 @@
-const scannedSet = new Set();
-const scannedIndex = new Map();
-let count = 0;
+import { initScanner, startScanner } from "./modules/scanner.js";
+import { hideModal, showSentModal, hideSentModal } from "./modules/modal.js";
+import { resetState, scannedSet } from "./modules/state.js";
+
+const TIMEOUT = 3000;
 
 const config = {
   fps: 20,
@@ -10,63 +12,24 @@ const config = {
   formatsToSupport: [Html5QrcodeSupportedFormats.DATA_MATRIX],
 };
 
-const html5Qrcode = new Html5Qrcode("reader", config);
-
-function onScanSuccess(text, result) {
-  count++;
-  console.log("Count:", count);
-  console.log("Scanned Text:", text);
-  console.log("Scanned Obj:", result);
-
-  console.log("Data type:", result.result.format.formatName);
-
-  if (result.result.format.formatName !== "DATA_MATRIX") return;
-
-  const key = result.decodedText;
-
-  if (scannedIndex.has(key)) {
-    console.log("Дубликат, не добавляем:", result);
-    return;
-  }
-
-  scannedSet.add(result);
-  scannedIndex.set(key, result);
-
-  document.getElementById("count_id").textContent = `Count: ${count}`;
-  document.getElementById("set-size").textContent =
-    `Set size: ${scannedSet.size}`;
-  document.getElementById("set-info").textContent =
-    `Set info:\n ${[...scannedIndex.keys()].join("\n")}`;
-
-  console.log("Всего уникальных:", scannedSet.size);
-  console.log("Set:", scannedSet);
-}
-
-function onScanError(err) {
-  console.warn("ERROR:", err);
-}
-
-Html5Qrcode.getCameras().then((cameras) => {
-  if (!cameras.length) {
-    console.error("No cameras found");
-    return;
-  }
-
-  let backCamera =
-    cameras.find((camera) => /back|rear|environment/i.test(camera.label)) ||
-    cameras.find((camera) => /wide|ultra|tele/i.test(camera.label));
-
-  const cameraId = backCamera ? backCamera.id : cameras[0].id;
-
-  console.log("Using camera:", backCamera?.label || "default");
-
-  document.getElementById("camera-in-use").textContent =
-    `Camera: ${backCamera?.label || "default"}`;
-
-  html5Qrcode.start({ deviceId: cameraId }, config, onScanSuccess, onScanError);
-});
+initScanner("reader", config);
 
 window.onload = () => {
   document.getElementById("ratio-size").textContent =
     `Ratio: ${config.aspectRatio}`;
 };
+
+document.getElementById("rescan-btn").addEventListener("click", () => {
+  hideModal();
+  resetState();
+  startScanner();
+});
+
+document.getElementById("send-btn").addEventListener("click", () => {
+  console.log(`Отправка... `, scannedSet);
+  showSentModal();
+  hideModal();
+  resetState();
+  setTimeout(hideSentModal, TIMEOUT);
+  setTimeout(startScanner, TIMEOUT);
+});

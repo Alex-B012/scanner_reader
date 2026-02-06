@@ -32,20 +32,6 @@ body {
   overflow: hidden;
 }
 
-video {
-  /* min-height: 600px; */
-  /* height: 500px; */
-  /* padding: 00px; */
-  /* background-color: red; */
-}
-
-#qr-canvas {
-  /* width: 320px;
-  height: 280px;
-  min-width: 320px; */
-  /* min-height: 680px; */
-}
-
 #ratio {
   position: fixed;
   bottom: 0;
@@ -60,6 +46,79 @@ video {
   padding: 2px 5px;
   color: red;
   z-index: 110;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 105;
+}
+
+.modal__content {
+  min-width: 260px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.modal__text {
+  line-height: 1.1;
+}
+
+.sent-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 106;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.sent-modal__content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  margin: 0 3%;
+}
+
+.sent-modal__text {
+  line-height: 1.1;
+  color: rgb(15, 105, 15);
+}
+
+.hidden {
+  display: none;
+}
+
+button {
+  width: 210px;
+  height: 40px;
+  margin-top: 20px;
+  border-radius: 5px;
+  border: 1px solid rgb(233, 233, 233);
+  font-size: 1rem;
+}
+
+button:first-of-type {
+  margin-top: 30px;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: lightgray;
 }
 
 @media screen and (max-width: 768px) {
