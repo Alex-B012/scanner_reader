@@ -11,7 +11,6 @@ export async function initScanner(readerId, scannerConfig) {
 
   const cameras = await Html5Qrcode.getCameras();
 
-  // 🔍 логируем каждую опцию поиска
   cameras.forEach((c) => {
     console.log("Camera obj:", c);
     console.log(c.label || "Без названия", {
@@ -33,22 +32,6 @@ export async function initScanner(readerId, scannerConfig) {
     )
     .join("");
 
-  // 🖥 вывод на экран
-  // document.getElementById("cameras_id").innerHTML = cameras
-  //   .map((c) => {
-  //     const label = c.label || "Без названия";
-  //     return `
-  //       <div style="margin-bottom:8px">
-  //         <div><strong>${label}</strong></div>
-  //         <div>back: ${c} ${/back/i.test(label) ? "✅" : "❌"}</div>
-  //         <div>rear: ${/rear/i.test(label) ? "✅" : "❌"}</div>
-  //         <div>environment: ${/environment/i.test(label) ? "✅" : "❌"}</div>
-  //       </div>
-  //     `;
-  //   })
-  //   .join("");
-
-  // 🎯 выбор back-камеры
   const backCamera =
     cameras.find((c) => /back|rear|environment/i.test(c.label)) || cameras[0];
 
