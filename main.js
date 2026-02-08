@@ -9,13 +9,23 @@ console.log("Браузер:", detectBrowser());
 
 const browser = detectBrowser();
 
+const screenResolution = {
+  screenWidth: screen.width,
+  screenHeight: screen.height,
+  viewportWidth: window.innerWidth,
+  viewportHeight: window.innerHeight,
+  devicePixelRatio: window.devicePixelRatio,
+};
+
 const config = {
   fps: 20,
   qrbox: { width: 320, height: 240 },
   aspectRatio:
     browser === "Firefox"
-      ? window.innerHeight / window.innerWidth
+      ? screenResolution.devicePixelRatio
       : window.innerWidth / window.innerHeight,
+  // aspectRatio: screenResolution.devicePixelRatio,
+  // aspectRatio: window.innerWidth / window.innerHeight,
   rememberLastUsedCamera: true,
   formatsToSupport: [Html5QrcodeSupportedFormats.DATA_MATRIX],
 };
