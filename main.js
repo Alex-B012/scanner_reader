@@ -20,12 +20,7 @@ const screenResolution = {
 const config = {
   fps: 20,
   qrbox: { width: 320, height: 240 },
-  aspectRatio:
-    browser === "Firefox"
-      ? screenResolution.devicePixelRatio
-      : window.innerWidth / window.innerHeight,
-  // aspectRatio: screenResolution.devicePixelRatio,
-  // aspectRatio: window.innerWidth / window.innerHeight,
+  aspectRatio: window.innerWidth / window.innerHeight,
   rememberLastUsedCamera: true,
   formatsToSupport: [Html5QrcodeSupportedFormats.DATA_MATRIX],
 };

@@ -2,7 +2,7 @@ export function detectBrowser() {
   const ua = navigator.userAgent;
   const data = navigator.userAgentData;
 
-  // Chromium-браузеры (Chrome, Edge, Opera, etc.)
+  // Chrome, Edge, Opera, etc.
   if (data?.brands) {
     const brands = data.brands.map((b) => b.brand).join(" ");
 
@@ -24,12 +24,10 @@ export function detectBrowser() {
     return "Safari";
   }
 
-  // Edge старый
+  // Edge - old
   if (ua.includes("Edge") || ua.includes("Edg")) {
     return "Edge";
   }
 
   return "Unknown";
 }
-
-console.log("Браузер:", detectBrowser());
