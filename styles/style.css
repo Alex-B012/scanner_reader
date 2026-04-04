@@ -57,7 +57,8 @@ body {
   padding: 2px 5px;
   padding-bottom: 50px;
   color: red;
-  z-index: 110;
+  font-size: 0.95rem;
+  z-index: 105;
 }
 
 .modal {
@@ -67,7 +68,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 105;
+  z-index: 110;
   /* max-height: 300px; */
 }
 

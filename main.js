@@ -20,15 +20,15 @@ console.log("viewportWidth", screenResolution.viewportWidth);
 console.log("viewportHeight", screenResolution.viewportHeight);
 console.log("devicePixelRatio", screenResolution.devicePixelRatio);
 
-document.getElementById("screenWidth_id").textContent =
-  `screenWidth: ${screenResolution.screenWidth}`;
-document.getElementById("screenHeight_id").textContent =
-  `screenHeight: ${screenResolution.screenHeight}`;
+// document.getElementById("screenWidth_id").textContent =
+//   `screenWidth: ${screenResolution.screenWidth}`;
+// document.getElementById("screenHeight_id").textContent =
+//   `screenHeight: ${screenResolution.screenHeight}`;
 
-document.getElementById("viewportWidth_id").textContent =
-  `viewportWidth: ${screenResolution.viewportWidth}`;
-document.getElementById("viewportHeight_id").textContent =
-  `viewportHeight: ${screenResolution.viewportHeight}`;
+// document.getElementById("viewportWidth_id").textContent =
+//   `viewportWidth: ${screenResolution.viewportWidth}`;
+// document.getElementById("viewportHeight_id").textContent =
+//   `viewportHeight: ${screenResolution.viewportHeight}`;
 
 const config = {
   fps: 15,
@@ -42,8 +42,8 @@ const config = {
 initScanner("reader", config);
 
 window.onload = () => {
-  document.getElementById("ratio-size").textContent =
-    `Ratio: ${config.aspectRatio}`;
+  // document.getElementById("ratio-size").textContent =
+  //   `Ratio: ${config.aspectRatio}`;
 
   const observer = new MutationObserver(() => {
     const video = document.querySelector("video");
@@ -53,10 +53,10 @@ window.onload = () => {
     observer.disconnect();
 
     video.addEventListener("loadedmetadata", () => {
-      document.getElementById("video_el_w_id").textContent =
-        `video_el_width: ${video.clientWidth}`;
-      document.getElementById("video_el_h_id").textContent =
-        `video_el_height: ${video.clientHeight}`;
+      // document.getElementById("video_el_w_id").textContent =
+      //   `video_el_width: ${video.clientWidth}`;
+      // document.getElementById("video_el_h_id").textContent =
+      //   `video_el_height: ${video.clientHeight}`;
     });
   });
 
@@ -72,26 +72,26 @@ document.getElementById("rescan-btn").addEventListener("click", () => {
   startScanner();
 });
 
-document.getElementById("test-btn").addEventListener("click", async () => {
-  const scannerData = [
-    {
-      text: "test-text_____sdajf9saHPUOIH9waru920324u09u0234u09u0234u09",
-      format: "test-format",
-      date: new Date().toISOString(),
-      telegramInitData: tg.initData,
-      chatId: tg.initDataUnsafe.chat?.id ?? tg.initDataUnsafe.user?.id,
-      userId: tg.initDataUnsafe.user?.id,
-    },
-  ];
-  const res = await sendScannerData(scannerData);
+// document.getElementById("test-btn").addEventListener("click", async () => {
+//   const scannerData = [
+//     {
+//       text: "test-text_____sdajf9saHPUOIH9waru920324u09u0234u09u0234u09",
+//       format: "test-format",
+//       date: new Date().toISOString(),
+//       telegramInitData: tg.initData,
+//       chatId: tg.initDataUnsafe.chat?.id ?? tg.initDataUnsafe.user?.id,
+//       userId: tg.initDataUnsafe.user?.id,
+//     },
+//   ];
+//   const res = await sendScannerData(scannerData);
 
-  if (!res) {
-    console.log("Something went wrong");
-  } else {
-    showSentModal();
-    setTimeout(hideSentModal, TIMEOUT);
-  }
-});
+//   if (!res) {
+//     console.log("Something went wrong");
+//   } else {
+//     showSentModal();
+//     setTimeout(hideSentModal, TIMEOUT);
+//   }
+// });
 
 document.getElementById("send-btn").addEventListener("click", async () => {
   const state = getState();

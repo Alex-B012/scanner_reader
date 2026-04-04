@@ -3,9 +3,9 @@ import { CONFIG } from "./../config.js";
 export async function sendScannerData(payload) {
   console.log("payload", payload);
 
-  document.getElementById("telegram-init-data").textContent =
-    `Telegram Init Data: ${payload[0]?.telegramInitData || "N/A"}`;
-
+  // document.getElementById("telegram-init-data").textContent =
+  //   `Telegram Init Data: ${payload[0]?.telegramInitData || "N/A"}`;
+  console.log(" CONFIG.API_URL:", CONFIG.API_URL);
   try {
     const { data: serverResponse } = await axios.post(
       CONFIG.API_URL + "/api/scanner/product",
@@ -19,8 +19,8 @@ export async function sendScannerData(payload) {
       throw new Error(serverResponse?.message || "Server returned failure");
 
     console.log(serverResponse.message || "Success");
-    document.getElementById("server-response").textContent =
-      `Server Response: ${serverResponse.message || "Success"}`;
+    // document.getElementById("server-response").textContent =
+    //   `Server Response: ${serverResponse.message || "Success"}`;
 
     return true;
   } catch (error) {

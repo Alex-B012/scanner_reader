@@ -30,26 +30,24 @@ async function getEnvironmentCameraId() {
   try {
     const tracks = stream.getVideoTracks();
 
-    if (!tracks.length) {
-      throw new Error("No video tracks in MediaStream");
-    }
+    if (!tracks.length) throw new Error("No video tracks in MediaStream");
 
     const track = tracks[0];
     const settings = track.getSettings();
 
     console.log("Video tracks:", tracks);
 
-    document.getElementById("cameras_back").innerHTML = tracks
-      .map(
-        (c, index) => `
-        <div style="margin-bottom:8px">
-          <div><strong>Back Camera ID${index + 1}</strong></div>
-          <div>id: ${c.id}<div>
-          <div>label: ${c.label || "Без названия"}</div>
-        </div>
-      `,
-      )
-      .join("");
+    // document.getElementById("cameras_back").innerHTML = tracks
+    //   .map(
+    //     (c, index) => `
+    //     <div style="margin-bottom:8px">
+    //       <div><strong>Back Camera ID${index + 1}</strong></div>
+    //       <div>id: ${c.id}<div>
+    //       <div>label: ${c.label || "Без названия"}</div>
+    //     </div>
+    //   `,
+    //   )
+    //   .join("");
 
     return {
       id: settings.deviceId || null,
@@ -70,8 +68,8 @@ export async function initScanner(readerId, scannerConfig) {
     envCamera = await getEnvironmentCameraId();
     console.log("Environment camera:", envCamera.id, envCamera.label);
 
-    document.getElementById("env_camera").textContent =
-      `Environment camera: ${envCamera.label}`;
+    // document.getElementById("env_camera").textContent =
+    //   `Environment camera: ${envCamera.label}`;
   } catch (e) {
     console.warn("Environment camera not available, fallback", e);
   }
@@ -95,8 +93,8 @@ export async function initScanner(readerId, scannerConfig) {
     cameras.find((c) => /back|rear|environment/i.test(c.label))?.id ||
     cameras[0].id;
 
-  document.getElementById("camera-in-use").textContent =
-    `Camera: ${backCamera.label || "default"}`;
+  // document.getElementById("camera-in-use").textContent =
+  //   `Camera: ${backCamera.label || "default"}`;
 
   startScanner();
 }
@@ -141,9 +139,9 @@ function onScanError(err) {
 function updateUI() {
   const { scannedSet, scannedIndex, count } = getState();
 
-  document.getElementById("count_id").textContent = `Count: ${count}`;
-  document.getElementById("set-size").textContent =
-    `Set size: ${scannedSet.size}`;
-  document.getElementById("set-info").textContent =
-    `Set info:\n${[...scannedIndex.keys()].join("\n")}`;
+  // document.getElementById("count_id").textContent = `Count: ${count}`;
+  // document.getElementById("set-size").textContent =
+  //   `Set size: ${scannedSet.size}`;
+  // document.getElementById("set-info").textContent =
+  //   `Set info:\n${[...scannedIndex.keys()].join("\n")}`;
 }
